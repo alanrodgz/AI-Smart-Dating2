@@ -7,51 +7,98 @@
 
 import SwiftUI
 import SwiftData
+import Firebase
+import FirebaseAuth
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
-
+    @State var isLoginMode = false
+    @State var email: String = ""
+    @State var password: String = ""
+    
+    init() {
+        FirebaseApp.configure()
+    }
+    
     var body: some View {
-        NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
+        NavigationView{
+            ScrollView {
+                
+                VStack(spacing: 16){
+                    Picker(selection: $isLoginMode, label: Text("Picker here")){
+                        Text("Login")
+                            .tag(true)
+                        Text("Create Account")
+                            .tag(false)
+                    }.pickerStyle(SegmentedPickerStyle())
+                    
+                    if !isLoginMode {
+                        Button {
+                            
+                        } label: {
+                            Image(systemName: "person.fill")
+                                .font(.system(size: 64))
+                                .padding()
+                        }
+                    }
+                    
+                    Group{
+                        TextField("Email", text: $email)
+                            .keyboardType(.emailAddress)
+                            .autocapitalization(.none)
+                        
+                        SecureField("Password", text: $password)
+
+                    }
+                        .padding(12)
+                        .background(Color.white)
+                    
+                    
+                    Button{
+                        handleAction()
                     } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
+                        HStack{
+                            Text(isLoginMode ? "Log In" : "Create Account")
+                                .foregroundColor(.white)
+                                .padding(.vertical, 10)
+                                .font(.system(size: 14, weight: .semibold))
+                            Spacer()
+                        }.background(Color.blue)
+                        
                     }
                 }
-                .onDelete(perform: deleteItems)
+                .padding()
+                
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-        } detail: {
-            Text("Select an item")
+            .navigationTitle(isLoginMode ? "Log In" : "Create Account")
+            .background(Color(.init(white: 0, alpha: 0.05))
+                .ignoresSafeArea())
+        }
+        .navigationViewStyle(StackNavigationViewStyle())
+    }
+    
+    private func handleAction() {
+        if isLoginMode {
+            login()
+        } else {
+            createNewAccount()
         }
     }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
+    
+    private func createNewAccount() { 
+        Auth.auth().createUser(withEmail: email, password: password) { result, error in
+          if let error = error {
+            print("FAILED TO CREATE NEW USER:", error.localizedDescription)
+            return
+          }
+          
+          if let user = result?.user {
+            print("Successfully created new user: \(user.uid)")
+          }
         }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
-            }
-        }
+      }
+    
+    private func login() {
+        
     }
 }
 

@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		A9E361792D506DA4002B1628 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = A9E361782D506DA4002B1628 /* FirebaseAuth */; };
+		A9E3617B2D506DA4002B1628 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = A9E3617A2D506DA4002B1628 /* FirebaseStorage */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		A9E3615B2D5069E3002B1628 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -29,9 +34,30 @@
 		A9E361642D5069E3002B1628 /* AI Smart DatingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AI Smart DatingUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		A9E361802D506EC8002B1628 /* Exceptions for "AI Smart Dating" folder in "AI Smart DatingTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"GoogleService-Info.plist",
+			);
+			target = A9E361592D5069E3002B1628 /* AI Smart DatingTests */;
+		};
+		A9E361812D506EC8002B1628 /* Exceptions for "AI Smart Dating" folder in "AI Smart DatingUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"GoogleService-Info.plist",
+			);
+			target = A9E361632D5069E3002B1628 /* AI Smart DatingUITests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		A9E3614A2D5069E1002B1628 /* AI Smart Dating */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				A9E361802D506EC8002B1628 /* Exceptions for "AI Smart Dating" folder in "AI Smart DatingTests" target */,
+				A9E361812D506EC8002B1628 /* Exceptions for "AI Smart Dating" folder in "AI Smart DatingUITests" target */,
+			);
 			path = "AI Smart Dating";
 			sourceTree = "<group>";
 		};
@@ -52,6 +78,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9E361792D506DA4002B1628 /* FirebaseAuth in Frameworks */,
+				A9E3617B2D506DA4002B1628 /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +140,8 @@
 			);
 			name = "AI Smart Dating";
 			packageProductDependencies = (
+				A9E361782D506DA4002B1628 /* FirebaseAuth */,
+				A9E3617A2D506DA4002B1628 /* FirebaseStorage */,
 			);
 			productName = "AI Smart Dating";
 			productReference = A9E361482D5069E1002B1628 /* AI Smart Dating.app */;
@@ -195,6 +225,9 @@
 			);
 			mainGroup = A9E3613F2D5069E1002B1628;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				A9E361772D506DA4002B1628 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = A9E361492D5069E1002B1628 /* Products */;
 			projectDirPath = "";
@@ -552,6 +585,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A9E361772D506DA4002B1628 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.7.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A9E361782D506DA4002B1628 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A9E361772D506DA4002B1628 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		A9E3617A2D506DA4002B1628 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A9E361772D506DA4002B1628 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A9E361402D5069E1002B1628 /* Project object */;
 }
